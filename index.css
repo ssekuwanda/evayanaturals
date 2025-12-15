@@ -1,0 +1,20 @@
+:root {
+  color-scheme: light;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  background: radial-gradient(circle at 20% 20%, rgba(85, 107, 93, 0.06), transparent 28%),
+              radial-gradient(circle at 80% 10%, rgba(212, 154, 137, 0.06), transparent 30%),
+              #FAF7F5;
+}
+
+a,
+button {
+  transition: transform 180ms ease, opacity 180ms ease;
+}
+
+a:hover,
+button:hover {
+  transform: translateY(-1px);
+}
