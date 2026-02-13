@@ -3,10 +3,11 @@ import { ShoppingBag, Menu, X, Search } from 'lucide-react';
 import { NavItem } from '../types';
 
 const navItems: NavItem[] = [
-  { label: 'Shop', href: '#shop' },
-  { label: 'Collections', href: '#collections' },
-  { label: 'About', href: '#about' },
-  { label: 'Journal', href: '#journal' },
+  { label: 'Home', href: '#top' },
+  { label: 'Shop by Category', href: '#categories' },
+  { label: 'Best Sellers', href: '#best-products' },
+  { label: 'Spices', href: '#spices' },
+  { label: 'Contact', href: '#contact' },
 ];
 
 const Navbar: React.FC = () => {
@@ -15,7 +16,7 @@ const Navbar: React.FC = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 40);
+      setScrolled(window.scrollY > 20);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
@@ -23,88 +24,77 @@ const Navbar: React.FC = () => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${scrolled ? 'bg-evaya-beige/80 backdrop-blur-xl py-4 shadow-[0_4px_30px_rgba(0,0,0,0.03)] border-b border-evaya-charcoal/5' : 'bg-transparent py-8'
-        }`}
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white/95 shadow-sm py-3 backdrop-blur' : 'bg-white py-4'
+        } border-b border-[#E8DFD4]`}
     >
       <div className="container mx-auto px-6 flex items-center justify-between">
+
         {/* Mobile Menu Button */}
         <button
-          className="md:hidden text-evaya-charcoal clickable"
+          className="lg:hidden text-[var(--text-main)]"
           onClick={() => setMobileMenuOpen(true)}
         >
           <Menu size={24} />
         </button>
 
-        {/* Desktop Links (Left) */}
-        <div className="hidden md:flex space-x-6">
-          {navItems.slice(0, 2).map((item) => (
+        {/* Logo */}
+        <div className="flex items-center">
+          <a href="#top" className="flex items-center gap-3">
+            <img src="/assets/products/logo-leaf.png" alt="EVAYA Naturals leaf" className="w-8 h-auto" />
+            <span className="text-2xl font-serif font-bold text-evaya-charcoal tracking-wide">
+              EVAYA Naturals
+            </span>
+          </a>
+        </div>
+
+        {/* Desktop Links */}
+        <div className="hidden lg:flex space-x-8">
+          {navItems.map((item) => (
             <a
               key={item.label}
               href={item.href}
-              className="group relative text-evaya-charcoal font-sans text-[11px] font-medium tracking-[0.2em] transition-colors clickable"
+              className="text-evaya-charcoal font-semibold hover:text-evaya-sage transition-colors text-sm uppercase tracking-wide"
             >
-              <span className="relative z-10">{item.label.toUpperCase()}</span>
-              <span className="absolute left-0 bottom-[-2px] w-full h-[1px] bg-evaya-terra scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left ease-out" />
+              {item.label}
             </a>
           ))}
         </div>
 
-        {/* Logo */}
-        <div className="flex flex-col items-center cursor-pointer clickable group">
-          <span className="text-3xl md:text-4xl font-serif font-medium tracking-tight text-evaya-charcoal group-hover:opacity-80 transition-opacity">
-            EVAYA
-          </span>
-        </div>
-
-        {/* Desktop Links (Right) & Icons */}
-        <div className="flex items-center space-x-4 md:space-x-6">
-          <div className="hidden md:flex space-x-6">
-            {navItems.slice(2).map((item) => (
-              <a
-                key={item.label}
-                href={item.href}
-                className="group relative text-evaya-charcoal font-sans text-[11px] font-medium tracking-[0.2em] transition-colors clickable"
-              >
-                <span className="relative z-10">{item.label.toUpperCase()}</span>
-                <span className="absolute left-0 bottom-[-2px] w-full h-[1px] bg-evaya-terra scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left ease-out" />
-              </a>
-            ))}
-          </div>
-
-          <div className="flex items-center space-x-3">
-            <button className="text-evaya-charcoal hover:text-evaya-sage transition-colors clickable hidden md:block">
-              <Search size={20} />
-            </button>
-            <button className="text-evaya-charcoal hover:text-evaya-sage transition-colors relative clickable">
-              <ShoppingBag size={20} />
-              <span className="absolute -top-1 -right-1 bg-evaya-terra text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center">0</span>
-            </button>
-            <button className="hidden md:inline-flex items-center px-5 py-2.5 rounded-sm bg-evaya-charcoal text-evaya-beige text-[10px] uppercase tracking-[0.25em] hover:bg-evaya-sage transition-colors duration-300 clickable">
-              Book consult
-            </button>
-          </div>
+        {/* Icons */}
+        <div className="flex items-center space-x-5">
+          <button className="text-[var(--text-main)] hover:text-[var(--primary)] transition-colors">
+            <Search size={20} />
+          </button>
+          <button className="text-[var(--text-main)] hover:text-[var(--primary)] transition-colors relative">
+            <ShoppingBag size={20} />
+            <span className="absolute -top-1 -right-1 bg-[var(--primary)] text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center">0</span>
+          </button>
         </div>
       </div>
 
       {/* Mobile Menu Overlay */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 bg-evaya-beige z-[60] flex flex-col items-center justify-center space-y-8 p-4 md:hidden">
-          <button
-            className="absolute top-6 left-6 text-evaya-charcoal clickable"
-            onClick={() => setMobileMenuOpen(false)}
-          >
-            <X size={24} />
-          </button>
-          {navItems.map((item) => (
-            <a
-              key={item.label}
-              href={item.href}
+        <div className="fixed inset-0 bg-white z-[60] flex flex-col p-6 lg:hidden">
+          <div className="flex justify-end mb-8">
+            <button
+              className="text-[var(--text-main)]"
               onClick={() => setMobileMenuOpen(false)}
-              className="text-2xl font-serif text-evaya-charcoal hover:text-evaya-sage transition-colors clickable"
             >
-              {item.label}
-            </a>
-          ))}
+              <X size={24} />
+            </button>
+          </div>
+          <div className="flex flex-col space-y-6">
+            {navItems.map((item) => (
+              <a
+                key={item.label}
+                href={item.href}
+                onClick={() => setMobileMenuOpen(false)}
+                className="text-xl font-medium text-[var(--text-main)] hover:text-[var(--primary)]"
+              >
+                {item.label}
+              </a>
+            ))}
+          </div>
         </div>
       )}
     </nav>

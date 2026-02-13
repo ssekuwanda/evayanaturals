@@ -1,129 +1,146 @@
-import React, { useMemo, useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { Product } from '../types';
 
-const products: (Product & { tag?: string })[] = [
-  { id: 1, name: "Velvet Sage Cleanser", category: "Face", price: 0, tag: "pH-balanced", image: "/assets/product-1.jpg", description: "" },
-  { id: 2, name: "Luminous Glow Oil", category: "Serums", price: 0, tag: "Awarded", image: "/assets/product-2.jpg", description: "" },
-  { id: 3, name: "Terra Clay Mask", category: "Treatments", price: 0, image: "/assets/product-3.jpg", description: "" },
-  { id: 4, name: "Botanical Mist", category: "Toners", price: 0, tag: "Cooling", image: "/assets/product-4.jpg", description: "" },
-  { id: 5, name: "Rejuvenating Eye Balm", category: "Eyes", price: 0, tag: "New", image: "/assets/product-5.jpg", description: "" },
-  { id: 6, name: "Hemp Seed Essence", category: "Serums", price: 0, tag: "Vegan", image: "/assets/product-6.jpg", description: "" },
-  { id: 7, name: "Solar Defense SPF", category: "Protection", price: 0, image: "/assets/product-7.jpg", description: "" },
-  { id: 8, name: "Rose Quartz Roller", category: "Tools", price: 0, image: "/assets/product-8.jpg", description: "" },
-  { id: 9, name: "Midnight Recovery", category: "Face", price: 0, image: "/assets/product-9.jpg", description: "" },
-  { id: 10, name: "Calming Gel", category: "Treatments", price: 0, image: "/assets/product-10.jpg", description: "" },
+const spices: Product[] = [
+  {
+    id: 21,
+    name: "Cayenne Pepper",
+    category: "Spices & Herbs",
+    price: 65000,
+    image: "https://images.unsplash.com/photo-1615485737455-1f6757f2e927?auto=format&fit=crop&w=720&q=80",
+    description: "Premium ground cayenne in spoon-ready form"
+  },
+  {
+    id: 22,
+    name: "Cinnamon Powder",
+    category: "Spices & Herbs",
+    price: 75000,
+    image: "https://images.unsplash.com/photo-1604908177775-9f55b2c8fcaa?auto=format&fit=crop&w=720&q=80",
+    description: "Aromatic Ceylon cinnamon spooned for dosing"
+  },
+  {
+    id: 23,
+    name: "Rubbed Oregano",
+    category: "Spices & Herbs",
+    price: 75000,
+    image: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=720&q=80",
+    description: "Italian seasoning essential, spooned for freshness"
+  },
+  {
+    id: 24,
+    name: "Turmeric Powder",
+    category: "Spices & Herbs",
+    price: 75000,
+    image: "https://images.unsplash.com/photo-1615485737446-67bd01ae8a96?auto=format&fit=crop&w=720&q=80",
+    description: "Golden wellness spice in a ready-to-use spoon"
+  },
 ];
 
 const ShopGrid: React.FC = () => {
-  const [activeCategory, setActiveCategory] = useState<string>('All');
-
-  const categories = useMemo(() => ['All', ...Array.from(new Set(products.map((p) => p.category)))], []);
-  const filteredProducts = activeCategory === 'All' ? products : products.filter((p) => p.category === activeCategory);
-
   return (
-    <section id="shop" className="py-24 bg-white/20 backdrop-blur-sm border-t border-white/20">
-      <div className="container mx-auto px-6">
-        <div className="text-center mb-10 space-y-3">
-          <span className="text-evaya-terra font-sans text-sm tracking-[0.24em] uppercase block">The Collection</span>
-          <h2 className="font-serif text-4xl text-evaya-charcoal">Shop Essentials</h2>
-          <p className="font-sans text-gray-600 max-w-2xl mx-auto">Layerable heroes for everyday calm and glow. Filter by ritual moment to build a routine that fits morning to midnight.</p>
+    <section id="spices" className="py-20 md:py-24 bg-gradient-to-b from-[#FAF7F5] to-white relative overflow-hidden">
+      {/* Background decoration */}
+      <div className="absolute top-0 left-1/4 w-64 h-64 bg-evaya-terra/5 rounded-full blur-3xl" />
+      <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-evaya-sage/5 rounded-full blur-3xl" />
+
+      <div className="container mx-auto px-6 relative z-10">
+        {/* Section Header */}
+        <div className="text-center mb-16 space-y-4">
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <div className="h-px w-16 bg-gradient-to-r from-transparent to-evaya-terra/40" />
+            <img src="/assets/products/logo-leaf.png" alt="EVAYA Naturals leaf mark" className="w-8 opacity-60" />
+            <div className="h-px w-16 bg-gradient-to-l from-transparent to-evaya-terra/40" />
+          </div>
+
+          <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl text-evaya-charcoal leading-tight">
+            Best Selling <span className="text-evaya-terra italic">Spices & Herbs</span>
+          </h2>
+
+          <p className="text-evaya-charcoal/70 text-lg max-w-2xl mx-auto leading-relaxed">
+            Elevate your culinary creations with our premium spices—authentic flavors from nature's pantry, priced in UGX for your convenience.
+          </p>
         </div>
 
-        <div className="flex flex-wrap gap-3 justify-center mb-12">
-          {categories.map((category) => (
-            <button
-              key={category}
-              onClick={() => setActiveCategory(category)}
-              className={`px-5 py-2 rounded-sm text-[11px] uppercase tracking-[0.2em] font-sans border transition-all duration-300 clickable ${activeCategory === category
-                ? 'bg-evaya-charcoal text-evaya-beige border-evaya-charcoal'
-                : 'bg-transparent text-evaya-charcoal border-evaya-charcoal/20 hover:border-evaya-charcoal'
-                }`}
-            >
-              {category}
-            </button>
-          ))}
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12">
-          {filteredProducts.map((product) => (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          {spices.map((product, index) => (
             <motion.div
               key={product.id}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="group cursor-pointer clickable"
+              transition={{ delay: index * 0.1, duration: 0.5 }}
               whileHover={{ y: -8 }}
+              className="group relative bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-white/60"
             >
-              <div className="relative overflow-hidden mb-4 aspect-[4/5] bg-[#F4F4F4] rounded-sm shadow-none group-hover:shadow-[0_20px_40px_rgba(0,0,0,0.06)] transition-all duration-500 ease-out">
-                <motion.img
-                  src={product.image}
-                  alt={product.name}
-                  className="w-full h-full object-cover mix-blend-multiply opacity-95"
-                  whileHover={{ scale: 1.08 }}
-                  transition={{ duration: 0.6 }}
-                />
-                <div className="absolute inset-x-4 top-4 flex items-center justify-between">
-                  <motion.span
-                    initial={{ opacity: 0, y: -10 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    className="text-[11px] uppercase tracking-[0.18em] bg-white/80 backdrop-blur-md text-evaya-charcoal px-3 py-1 rounded-full"
-                  >
-                    {product.category}
-                  </motion.span>
-                  {product.tag && (
-                    <motion.span
-                      initial={{ opacity: 0, y: -10 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.1 }}
-                      className="text-[10px] uppercase tracking-[0.2em] bg-evaya-terra text-white px-2 py-1 rounded-sm font-medium"
-                    >
-                      {product.tag}
-                    </motion.span>
-                  )}
-                </div>
-                <motion.div
-                  className="absolute inset-x-0 bottom-0 p-4"
-                  initial={{ y: '100%' }}
-                  whileHover={{ y: 0 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <motion.button
-                    whileTap={{ scale: 0.98 }}
-                    className="w-full bg-white/90 backdrop-blur text-evaya-charcoal py-4 text-[10px] tracking-[0.25em] uppercase font-medium hover:bg-evaya-charcoal hover:text-white transition-colors border-t border-white/20"
-                  >
-                    Add to Cart
-                  </motion.button>
-                </motion.div>
+              {/* Card gradients */}
+              <div className="absolute inset-0 bg-gradient-to-br from-white via-[#FDFCFB] to-[#F9F6F0]" />
+              <div className="absolute inset-0 bg-gradient-to-br from-evaya-terra/0 via-evaya-terra/0 to-evaya-terra/8 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+              {/* Shine effect */}
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700">
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
               </div>
-              <div className="flex justify-between items-start gap-2">
-                <div className="flex-1 text-center">
-                  <motion.h3
-                    className="font-serif text-lg text-evaya-charcoal group-hover:text-evaya-sage transition-colors"
-                    whileHover={{ scale: 1.02 }}
-                    transition={{ duration: 0.2 }}
-                  >
+
+              <div className="relative z-10">
+                {/* Image container */}
+                <div className="relative aspect-square bg-gradient-to-br from-[#FAF7F5] to-white flex items-center justify-center p-8 border-b-2 border-evaya-terra/10 group-hover:border-evaya-terra/20 transition-colors">
+                  <div className="absolute inset-0 bg-gradient-to-br from-evaya-terra/5 to-transparent rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="relative h-48 w-full object-contain group-hover:scale-110 transition-transform duration-700 ease-out"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.src = '/assets/products/spices.png';
+                    }}
+                  />
+                  <div className="absolute top-4 right-4">
+                    <span className="inline-flex items-center gap-1.5 text-[10px] uppercase tracking-[0.16em] bg-evaya-terra/90 text-white px-3 py-1.5 rounded-full font-bold shadow-lg backdrop-blur-sm">
+                      <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                      </svg>
+                      Premium
+                    </span>
+                  </div>
+                </div>
+
+                {/* Content */}
+                <div className="p-6 space-y-3">
+                  <p className="text-[10px] uppercase tracking-[0.2em] text-evaya-terra font-bold">{product.category}</p>
+
+                  <h3 className="font-serif text-xl text-evaya-charcoal group-hover:text-evaya-terra transition-colors duration-300 leading-tight min-h-[56px]">
                     {product.name}
-                  </motion.h3>
-                  <p className="text-xs font-sans text-gray-400 uppercase tracking-wide mt-1">{product.category}</p>
+                  </h3>
+
+                  <p className="text-sm text-evaya-charcoal/65 leading-relaxed">
+                    {product.description}
+                  </p>
+
+                  {/* Divider */}
+                  <div className="h-px bg-gradient-to-r from-evaya-terra/20 via-evaya-terra/10 to-transparent" />
+
+                  {/* Price */}
+                  <div className="flex items-baseline gap-2 pt-2">
+                    <span className="text-2xl font-bold text-evaya-charcoal">
+                      UGX {product.price.toLocaleString()}
+                    </span>
+                  </div>
+
+                  {/* CTA Button */}
+                  <button className="mt-4 w-full bg-gradient-to-r from-evaya-charcoal to-evaya-charcoal/90 text-white py-3.5 rounded-2xl text-xs tracking-[0.18em] font-bold hover:from-evaya-terra hover:to-evaya-terra/90 transition-all duration-300 shadow-md hover:shadow-xl flex items-center justify-center gap-2 group/btn">
+                    <span>Add to Basket</span>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="group-hover/btn:translate-x-1 transition-transform">
+                      <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                  </button>
                 </div>
               </div>
             </motion.div>
           ))}
         </div>
-
-        <div className="mt-16 text-center">
-          <motion.button
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            className="px-10 py-4 border border-evaya-charcoal text-evaya-charcoal font-sans tracking-[0.2em] text-[11px] uppercase font-medium hover:bg-evaya-charcoal hover:text-white transition-all duration-300 clickable rounded-sm"
-          >
-            VIEW ALL PRODUCTS
-          </motion.button>
-        </div>
       </div>
-    </section >
+    </section>
   );
 };
 
