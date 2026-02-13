@@ -63,8 +63,11 @@ const ShopGrid: React.FC = () => {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {spices.map((product, index) => (
-            <motion.div
+          {spices.map((product, index) => {
+            const isCayennePepper = product.name === 'Cayenne Pepper';
+
+            return (
+              <motion.div
               key={product.id}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -103,6 +106,17 @@ const ShopGrid: React.FC = () => {
                       Premium
                     </span>
                   </div>
+                  {isCayennePepper && (
+                    <div className="absolute top-4 left-4">
+                      <span className="inline-flex items-center gap-1.5 text-[10px] uppercase tracking-[0.16em] bg-white/95 text-evaya-charcoal px-3 py-1.5 rounded-full font-bold shadow-lg border border-evaya-terra/20 backdrop-blur-sm">
+                        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                          <ellipse cx="9.5" cy="8.5" rx="5.5" ry="3.5" />
+                          <path d="M14 11l6.5 6.5" />
+                        </svg>
+                        Spoon
+                      </span>
+                    </div>
+                  )}
                 </div>
 
                 {/* Content */}
@@ -136,8 +150,9 @@ const ShopGrid: React.FC = () => {
                   </button>
                 </div>
               </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>
