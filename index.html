@@ -3,14 +3,140 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>EVAYA | Nature Meets Luxury</title>
-    
+    <title>EVAYA Naturals | Premium Organic Spices, Herbal Supplements & Natural Products in Uganda</title>
+    <meta name="description" content="Shop EVAYA Naturals for premium organic spices, herbal powders, cold-pressed oils, dried fruits, nuts, and wellness supplements. Same-day delivery in Kampala. 100+ natural products at the best UGX prices." />
+    <meta name="keywords" content="organic spices Uganda, herbal supplements Kampala, natural products, cold-pressed oils, herbal powders, dried fruits, wellness supplements, EVAYA Naturals" />
+    <link rel="canonical" href="https://evayanaturals.com/" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://evayanaturals.com/" />
+    <meta property="og:title" content="EVAYA Naturals | Premium Organic Spices & Natural Products in Uganda" />
+    <meta property="og:description" content="Shop 100+ premium organic spices, herbal supplements, cold-pressed oils, and wellness products. Same-day delivery in Kampala at the best UGX prices." />
+    <meta property="og:image" content="https://evayanaturals.com/assets/products/spices.png" />
+    <meta property="og:image:alt" content="EVAYA Naturals organic products collection" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="EVAYA Naturals" />
+    <meta property="og:locale" content="en_UG" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="EVAYA Naturals | Premium Organic Spices & Natural Products in Uganda" />
+    <meta name="twitter:description" content="Shop 100+ premium organic spices, herbal supplements, cold-pressed oils, and wellness products. Same-day delivery in Kampala." />
+    <meta name="twitter:image" content="https://evayanaturals.com/assets/products/spices.png" />
+    <meta name="twitter:image:alt" content="EVAYA Naturals organic products collection" />
+
+    <!-- Additional SEO -->
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#2D5A27" />
+    <meta name="author" content="EVAYA Naturals" />
+
+    <!-- GitHub Pages SPA path recovery (supports /shop and /wellness-hub direct loads) -->
+    <script>
+      (function(l) {
+        if (l.search[1] === '/') {
+          var decoded = l.search.slice(1).split('&').map(function(s) {
+            return s.replace(/~and~/g, '&');
+          }).join('?');
+          window.history.replaceState(null, null, l.pathname.slice(0, -1) + decoded + l.hash);
+        }
+      }(window.location));
+    </script>
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://evayanaturals.com/#organization",
+          "name": "EVAYA Naturals",
+          "url": "https://evayanaturals.com/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://evayanaturals.com/assets/products/logo-evaya.png"
+          }
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://evayanaturals.com/#website",
+          "url": "https://evayanaturals.com/",
+          "name": "EVAYA Naturals",
+          "publisher": {
+            "@id": "https://evayanaturals.com/#organization"
+          },
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://evayanaturals.com/shop?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
+        },
+        {
+          "@type": "Store",
+          "@id": "https://evayanaturals.com/#store",
+          "name": "EVAYA Naturals",
+          "description": "Premium organic spices, herbal supplements, cold-pressed oils, and natural wellness products in Uganda.",
+          "url": "https://evayanaturals.com/",
+          "image": "https://evayanaturals.com/assets/products/spices.png",
+          "priceRange": "UGX 5,000 - UGX 150,000",
+          "currenciesAccepted": "UGX",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Kyato complex B4-03, next to Equatorial Mall",
+            "addressLocality": "Kampala",
+            "addressCountry": "UG"
+          },
+          "areaServed": {
+            "@type": "Country",
+            "name": "Uganda"
+          },
+          "openingHoursSpecification": [
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+              "opens": "00:00",
+              "closes": "23:59"
+            }
+          ],
+          "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Natural Products",
+            "itemListElement": [
+              { "@type": "OfferCatalog", "name": "Spices & Herbs" },
+              { "@type": "OfferCatalog", "name": "Herbal Supplements" },
+              { "@type": "OfferCatalog", "name": "Oils & Butters" },
+              { "@type": "OfferCatalog", "name": "Herbal Powders" },
+              { "@type": "OfferCatalog", "name": "Skincare" },
+              { "@type": "OfferCatalog", "name": "Hair Care" },
+              { "@type": "OfferCatalog", "name": "Herbal Teas" },
+              { "@type": "OfferCatalog", "name": "Wellness" }
+            ]
+          }
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "name": ["Home", "Shop", "Wellness Hub", "About Us", "Reviews", "Contact"],
+          "url": [
+            "https://evayanaturals.com/",
+            "https://evayanaturals.com/shop",
+            "https://evayanaturals.com/wellness-hub",
+            "https://evayanaturals.com/#about",
+            "https://evayanaturals.com/#reviews",
+            "https://evayanaturals.com/#contact"
+          ]
+        }
+      ]
+    }
+    </script>
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Source+Sans+3:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="/favicon.png">
-    
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -18,45 +144,34 @@
         theme: {
           extend: {
             colors: {
-              evaya: {
-                sage: '#556B5D',      /* Softened Sage */
-                lightSage: '#8FA895', /* Muted Light Sage */
-                terra: '#D49A89',     /* Warmer Terra-Cotta */
-                beige: '#FAF7F5',     /* Clean Cream/White */
-                charcoal: '#1A1A1A',  /* Deep Luxury Black */
-                cream: '#FEFCF8',     /* Pure Cream */
-                gold: '#D4AF37'       /* Accent Gold */
+              ev: {
+                green: '#2D5A27',
+                greenDark: '#1E3D1A',
+                greenLight: '#4A7C42',
+                leaf: '#3B7A34',
+                cream: '#FBF8F1',
+                beige: '#F5EFE0',
+                sand: '#EDE5D0',
+                gold: '#DAA520',
+                goldLight: '#F0D060',
+                bark: '#2C2416',
+                text: '#1A1A1A',
+                muted: '#6B6B5E',
+                border: '#DDD5C4',
               }
             },
             fontFamily: {
-              sans: ['Open Sans', 'sans-serif'],
-              serif: ['Merriweather', 'serif'],
+              heading: ['Lora', 'serif'],
+              body: ['Source Sans 3', 'sans-serif'],
+              accent: ['Playfair Display', 'serif'],
             },
-            backgroundImage: {
-              'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-            }
           }
         }
       }
     </script>
     <style>
-      /* Hide scrollbar for clean horizontal scroll */
-      .no-scrollbar::-webkit-scrollbar {
-        display: none;
-      }
-      .no-scrollbar {
-        -ms-overflow-style: none;
-        scrollbar-width: none;
-      }
-      body {
-        background-color: #F6F1E8;
-      }
-      /* Ensure links show pointer if JS fails or for a11y fallback */
-      @media (hover: none) {
-        body {
-          cursor: auto;
-        }
-      }
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
   <script type="importmap">
 {
@@ -73,6 +188,25 @@
 </head>
   <body>
     <div id="root"></div>
+    <noscript>
+      <div style="max-width:800px;margin:60px auto;padding:20px;font-family:sans-serif;">
+        <h1>EVAYA Naturals - Premium Organic Spices & Natural Products in Uganda</h1>
+        <p>Shop 100+ premium organic spices, herbal supplements, cold-pressed oils, herbal powders, dried fruits, nuts, and wellness products. Same-day delivery in Kampala at the best UGX prices.</p>
+        <h2>Product Categories (160+ Products)</h2>
+        <ul>
+          <li>Spices &amp; Herbs - Cayenne Pepper, Cinnamon, Saffron, Celtic Sea Salt, Rubbed Oregano, Rosemary</li>
+          <li>Herbal Supplements - Ashwagandha, Shilajit, Lion's Mane, Reishi Mushroom, Elderberry, Tongkat Ali, Tribulus Terrestris, Saw Palmetto, Dong Quai, Ginkgo Biloba, Gotu Kola, Valerian Root, Turkey Tail, Chaga Mushroom, Shiitake, Black Maca, Red Maca, Yellow Maca, Shatavari, Chasteberry, Black Cohosh, Sarsaparilla, Motherwort, MSM, Mugwort, Wormwood, Burdock Root, Dandelion Root, Marshmallow Root, Slippery Elm, Feverfew, Mullein Leaf, Red Clover, Soursop, Prunus Africana, Wild Yam, White Willow Bark, Vitex Seeds, Vitamin C, Marine Collagen, Propolis Extract</li>
+          <li>Herbal Powders - Alfalfa Powder, Moringa Leaf Powder, Chlorella, Spirulina, Brahmi, Cranberry Powder, Hawthorn Berry Powder, Neem Leaf Powder, Qasil Powder, Sea Moss Powder, Spearmint Powder, Stinging Nettle Powder</li>
+          <li>Oils &amp; Butters - Avocado Oil, Black Seed Oil, Castor Oil, Batana Oil, Coconut Oil, Marula Oil, Moringa Oil, Calendula Oil, Carrot Seed Oil, Papaya Oil, Fenugreek Oil, Oregano Oil, Lavender Essential Oil, Shea Butter, Cocoa Butter, Amla Oil, Rosehip Oil, Tea Tree Oil</li>
+          <li>Skincare - African Black Soap, Shea Butter Soap, Turmeric Scrub, Turmeric Face &amp; Body Butter, Bentonite Clay, Aloe Vera Gel, Witch Hazel, Rose Water, Strawberry Luxe Balm, Tag Relief Soap</li>
+          <li>Hair Care - Batana Oil Shampoo, Henna, Chebe Powder, Indigo, Shikakai Powder, Beard Oil, Beard Balm, Bhringraj</li>
+          <li>Herbal Teas - Matcha, Chamomile, Fibroid Tea, Pressure Tea, Tubal Blockage Tea, Infection Herb Infusion</li>
+          <li>Wellness - Epsom Salt, Activated Charcoal, Boric Acid Suppositories, Yoni Detox Pearls, Raw Probiotics</li>
+          <li>Seeds &amp; Superfoods - Chia Seeds, Flax Seeds, Fenugreek Seeds</li>
+        </ul>
+        <p>Contact us at <a href="https://evayanaturals.com">evayanaturals.com</a></p>
+      </div>
+    </noscript>
   <script type="module" src="/index.tsx"></script>
 </body>
 </html>

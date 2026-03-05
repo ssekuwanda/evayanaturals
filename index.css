@@ -1,16 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600&family=Merriweather:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Source+Sans+3:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
 :root {
-  --primary: #2F3A23; /* Deep olive */
-  --primary-dark: #1F2717;
-  --secondary: #D3B07F; /* Warm gold */
-  --bg-light: #F6F1E8; /* Cream */
-  --text-main: #1F211A;
-  --text-muted: #5C6055;
-  --white: #FFFFFF;
-  
-  --font-heading: 'Merriweather', serif;
-  --font-body: 'Open Sans', sans-serif;
+  --green: #2D5A27;
+  --green-dark: #1E3D1A;
+  --green-light: #4A7C42;
+  --cream: #FBF8F1;
+  --beige: #F5EFE0;
+  --gold: #DAA520;
+  --text: #1A1A1A;
+  --muted: #6B6B5E;
+  --border: #DDD5C4;
 }
 
 * {
@@ -19,23 +18,28 @@
   padding: 0;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  font-family: var(--font-body);
-  background-color: var(--bg-light);
-  color: var(--text-main);
+  font-family: 'Source Sans 3', sans-serif;
+  background-color: var(--cream);
+  color: var(--text);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-heading);
+  font-family: 'Lora', serif;
   font-weight: 600;
-  color: var(--primary);
   line-height: 1.2;
 }
 
 button {
-  font-family: var(--font-body);
+  font-family: 'Source Sans 3', sans-serif;
   cursor: pointer;
 }
 
@@ -44,27 +48,84 @@ img {
   display: block;
 }
 
-/* Utilities */
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1.5rem;
+/* Decorative leaf float animation */
+@keyframes leafFloat {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(-8px) rotate(3deg); }
+  75% { transform: translateY(4px) rotate(-2deg); }
 }
 
-.btn-primary {
-  background-color: var(--primary);
-  color: var(--white);
-  padding: 0.75rem 1.5rem;
-  border: none;
-  border-radius: 4px;
-  font-weight: 500;
-  transition: background-color 0.2s;
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-.btn-primary:hover {
-  background-color: var(--primary-dark);
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
-.soft-card {
-  box-shadow: 0 18px 45px rgba(34, 40, 30, 0.08);
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-32px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(32px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.92); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.anim-fade-up {
+  animation: fadeInUp 0.7s ease-out both;
+}
+
+.anim-fade {
+  animation: fadeIn 0.6s ease-out both;
+}
+
+.anim-slide-left {
+  animation: slideInLeft 0.7s ease-out both;
+}
+
+.anim-slide-right {
+  animation: slideInRight 0.7s ease-out both;
+}
+
+.anim-scale {
+  animation: scaleIn 0.5s ease-out both;
+}
+
+/* Stagger delays */
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.2s; }
+.delay-3 { animation-delay: 0.3s; }
+.delay-4 { animation-delay: 0.4s; }
+.delay-5 { animation-delay: 0.5s; }
+
+/* Leaf decoration */
+.leaf-float {
+  animation: leafFloat 4s ease-in-out infinite;
+}
+
+/* Gold star fill */
+.star-gold { color: #DAA520; }
+
+/* Organic border radius */
+.organic-radius {
+  border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+}
+
+/* Subtle grain texture overlay */
+.grain-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.03;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
 }

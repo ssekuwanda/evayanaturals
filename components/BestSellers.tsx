@@ -1,73 +1,134 @@
-import React, { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
-import { Product } from '../types';
+import React from 'react';
+import { motion } from 'framer-motion';
 import { ChevronRight } from 'lucide-react';
 
-type FeaturedProduct = Product & { range: string; badge?: string };
+interface Product {
+  id: number;
+  name: string;
+  price: number;
+  image: string;
+  rating: number;
+  badge?: string;
+  badgeColor?: string;
+}
 
-const products: FeaturedProduct[] = [
-  { id: 1, name: "ALFALFA POWDER", category: "Herbal Powders", price: 75000, range: "UGX 75,000", badge: "Sale!", image: "/assets/products/alfafa-juice.png", description: "" },
-  { id: 2, name: "AVOCADO OIL", category: "Herbal Oils", price: 55000, range: "UGX 55,000", badge: "Sale!", image: "/assets/products/avocado-oil.png", description: "" },
-  { id: 3, name: "PURE HONEY", category: "Sweeteners", price: 45000, range: "UGX 45,000", badge: "New", image: "/assets/products/honey.png", description: "" },
-  { id: 4, name: "BEE POLLEN POWDER", category: "Supplements", price: 80000, range: "UGX 80,000", badge: "Popular", image: "/assets/products/bee-pollen.png", description: "" },
+const products: Product[] = [
+  {
+    id: 1,
+    name: 'Moringa Powder',
+    price: 75000,
+    image: '/assets/products/alfafa-juice.png',
+    rating: 4.9,
+    badge: 'Tag6',
+    badgeColor: 'bg-ev-gold',
+  },
+  {
+    id: 2,
+    name: 'Avocado Oil',
+    price: 55000,
+    image: '/assets/products/avocado-oil.png',
+    rating: 4.8,
+  },
+  {
+    id: 3,
+    name: 'Turmeric Ginger Tea',
+    price: 45000,
+    image: '/assets/products/teapots.png',
+    rating: 4.9,
+  },
+  {
+    id: 4,
+    name: 'Ashwagandha',
+    price: 80000,
+    image: '/assets/products/bee-pollen.png',
+    rating: 4.8,
+  },
 ];
 
-const ProductCard: React.FC<{ product: FeaturedProduct }> = ({ product }) => {
-  return (
-    <motion.div
-      className="group bg-white border border-[#E8DFD4] rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all"
-      whileHover={{ y: -6 }}
-      transition={{ duration: 0.25 }}
-    >
-      <div className="relative bg-[#F9F4EC] flex items-center justify-center p-6">
-        <img src={product.image} alt={product.name} className="h-48 object-contain" />
-        {product.badge && (
-          <span className="absolute top-4 left-4 text-[11px] uppercase tracking-[0.18em] bg-evaya-sage text-white px-3 py-1 rounded-full shadow-sm">
-            {product.badge}
-          </span>
-        )}
-      </div>
-      <div className="p-5 space-y-2">
-        <p className="text-xs uppercase tracking-[0.18em] text-evaya-sage font-semibold">{product.category}</p>
-        <h3 className="font-serif text-xl text-evaya-charcoal leading-tight">{product.name}</h3>
-        <p className="text-sm text-evaya-charcoal/80 font-semibold">{product.range}</p>
-        <button className="mt-2 w-full bg-evaya-charcoal text-white py-2.5 rounded-full text-xs tracking-[0.18em] font-semibold hover:bg-black transition-colors">
-          Add to basket
-        </button>
-      </div>
-    </motion.div>
-  );
-};
+const StarRating: React.FC<{ rating: number }> = ({ rating }) => (
+  <div className="flex items-center gap-1">
+    {[...Array(5)].map((_, i) => (
+      <svg
+        key={i}
+        width="13"
+        height="13"
+        viewBox="0 0 24 24"
+        fill={i < Math.floor(rating) ? '#DAA520' : '#E0D5C0'}
+      >
+        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+      </svg>
+    ))}
+    <span className="font-body text-xs text-ev-muted ml-1">{rating}</span>
+  </div>
+);
 
 const BestSellers: React.FC = () => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-
   return (
-    <section id="best-products" className="py-16 bg-[#F8F5F0]">
-      <div className="container mx-auto px-6">
-        <div className="mb-10 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-          <motion.div
-            ref={ref}
-            initial={{ opacity: 0, x: -50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8 }}
-          >
-            <span className="text-evaya-sage font-sans text-xs tracking-[0.28em] uppercase block mb-2">EVAYA Naturals picks</span>
-            <h2 className="font-serif text-3xl md:text-4xl text-evaya-charcoal leading-tight">Best Selling Products</h2>
-            <p className="font-sans text-evaya-charcoal/70 mt-2 max-w-xl">
-              Hero items from EVAYA Naturals with UGX pricing pulled from your price list (sample).
-            </p>
-          </motion.div>
+    <section id="best-sellers" className="py-16 md:py-20 bg-white relative overflow-hidden">
+      {/* Leaf decoration */}
+      <div className="absolute -left-8 bottom-20 w-24 h-24 opacity-[0.05] pointer-events-none rotate-45">
+        <svg viewBox="0 0 100 100" fill="#2D5A27">
+          <path d="M50 5C30 20 10 45 15 75c5 25 30 20 35 15C55 85 75 70 80 45 85 20 65 5 50 5z"/>
+        </svg>
+      </div>
 
-          <button className="inline-flex items-center self-start md:self-auto text-evaya-charcoal font-sans text-[11px] tracking-[0.18em] font-semibold border-b border-evaya-charcoal/30 pb-1 hover:border-evaya-charcoal transition-all group clickable">
-            VIEW ALL PRODUCTS <ChevronRight size={16} className="ml-2 group-hover:translate-x-1 transition-transform" />
-          </button>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        {/* Header */}
+        <div className="flex items-center justify-between mb-10">
+          <div className="flex items-center gap-3">
+            <div className="h-[2px] w-6 bg-ev-green" />
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2D5A27" strokeWidth="2"><path d="M12 5v14M5 12h14"/></svg>
+            <h2 className="font-heading text-3xl md:text-4xl text-ev-text">Best Sellers</h2>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2D5A27" strokeWidth="2"><path d="M19 12H5"/></svg>
+            <div className="h-[2px] w-6 bg-ev-green" />
+          </div>
+          <a
+            href="#"
+            className="inline-flex items-center gap-1 font-body text-sm font-semibold text-ev-text border border-ev-border rounded-full px-5 py-2 hover:border-ev-green hover:text-ev-green transition-all"
+          >
+            View All <ChevronRight size={14} />
+          </a>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {products.map((product) => (
-            <ProductCard key={product.id} product={product} />
+        {/* Product Grid */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+          {products.map((product, i) => (
+            <motion.div
+              key={product.id}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1, duration: 0.5 }}
+              whileHover={{ y: -4 }}
+              className="group bg-white rounded-2xl border border-ev-border/70 overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300"
+            >
+              {/* Image */}
+              <div className="relative bg-gradient-to-br from-ev-cream to-ev-beige p-4 sm:p-6 flex items-center justify-center h-40 sm:h-48">
+                {product.badge && (
+                  <span className={`absolute top-3 left-3 ${product.badgeColor} text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-md shadow-sm`}>
+                    {product.badge}
+                  </span>
+                )}
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  className="h-28 sm:h-36 object-contain group-hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+              {/* Content */}
+              <div className="p-4 space-y-2">
+                <h3 className="font-heading text-base sm:text-lg font-semibold text-ev-text leading-tight group-hover:text-ev-green transition-colors">
+                  {product.name}
+                </h3>
+                <p className="font-body text-sm font-bold text-ev-text">
+                  UGX {product.price.toLocaleString()}
+                </p>
+                <StarRating rating={product.rating} />
+                <button className="w-full mt-2 font-body text-sm font-semibold py-2.5 rounded-lg border-2 border-ev-green text-ev-green hover:bg-ev-green hover:text-white transition-all duration-200">
+                  Add to Cart
+                </button>
+              </div>
+            </motion.div>
           ))}
         </div>
       </div>
