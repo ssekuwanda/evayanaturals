@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, X, ArrowLeft, Filter, Leaf } from 'lucide-react';
+import { Search, X, ArrowLeft, Filter, Leaf, MessageCircle } from 'lucide-react';
 
 /* ─── Product type ─── */
 interface Product {
@@ -341,6 +341,13 @@ const categoryColors: Record<string, string> = {
 const ShopPage: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
+  const whatsappNumber = '256773178790';
+  const shareBaseUrl = useMemo(() => {
+    if (typeof window === 'undefined') return 'https://evayanaturals.com';
+    const host = window.location.hostname;
+    if (host === 'localhost' || host === '127.0.0.1') return 'https://evayanaturals.com';
+    return window.location.origin;
+  }, []);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -379,6 +386,16 @@ const ShopPage: React.FC = () => {
       })
       .sort((a, b) => a.name.localeCompare(b.name));
   }, [searchQuery, selectedCategory]);
+
+  const getProductWhatsAppLink = (product: Product, imageSrc: string) => {
+    const imageUrl = imageSrc.startsWith('http') ? imageSrc : `${shareBaseUrl}${imageSrc}`;
+    const message = [
+      `Hi EVAYA Naturals, I'm interested in *${product.name}* (${product.category}).`,
+      'Please share price and availability.',
+      `Image: ${imageUrl}`,
+    ].join('\n');
+    return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+  };
 
   // Group by category (not alphabetical letter)
   const grouped = useMemo(() => {
@@ -532,7 +549,7 @@ const ShopPage: React.FC = () => {
             </div>
           )}
 
-          {/* Products by letter group */}
+          {/* Products by category group */}
           <AnimatePresence mode="wait">
             {filtered.length > 0 ? (
               <motion.div
@@ -560,6 +577,7 @@ const ShopPage: React.FC = () => {
                         const logoFallback = '/assets/products/logo-evaya.png';
                         const imageSrc = productImages[product.name] || logoFallback;
                         const hasSpecificImage = !!productImages[product.name] && productImages[product.name] !== logoFallback;
+                        const whatsappShareLink = getProductWhatsAppLink(product, imageSrc);
 
                         return (
                           <motion.div
@@ -595,6 +613,16 @@ const ShopPage: React.FC = () => {
                           <span className={`inline-block font-body text-[10px] font-semibold px-2 py-0.5 rounded-full border ${categoryColors[product.category]}`}>
                             {product.category}
                           </span>
+                          <a
+                            href={whatsappShareLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label={`Share ${product.name} on WhatsApp`}
+                            className="mt-3 inline-flex w-full items-center justify-center gap-1.5 rounded-lg bg-[#25D366] hover:bg-[#1EBE57] text-white font-body text-[11px] sm:text-xs font-semibold px-2.5 py-2 transition-all duration-200 shadow-sm shadow-[#25D366]/20 opacity-100 sm:opacity-0 sm:translate-y-1 sm:pointer-events-none sm:group-hover:opacity-100 sm:group-hover:translate-y-0 sm:group-hover:pointer-events-auto sm:group-focus-within:opacity-100 sm:group-focus-within:translate-y-0 sm:group-focus-within:pointer-events-auto"
+                          >
+                            <MessageCircle size={14} />
+                            Share on WhatsApp
+                          </a>
                           </motion.div>
                         );
                       })}
