@@ -28,11 +28,10 @@ const About: React.FC = () => {
           >
             <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-ev-green/10">
               <img
-                src="/assets/product-9.jpg"
-                alt="EVAYA Naturals wellness products and natural ingredients"
-                className="w-full h-[360px] sm:h-[440px] object-cover"
+                src="/assets/products/about-hero.png"
+                alt="Woman harvesting fresh herbs and natural ingredients for EVAYA Naturals"
+                className="w-full h-[360px] sm:h-[440px] object-cover object-center"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-ev-green/30 via-transparent to-transparent" />
             </div>
             {/* Floating accent */}
             <div className="absolute -bottom-4 -right-4 w-32 h-32 rounded-full bg-ev-green/8 blur-2xl" />
