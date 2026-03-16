@@ -32,6 +32,10 @@ const About: React.FC = () => {
                 alt="Woman harvesting fresh herbs and natural ingredients for EVAYA Naturals"
                 className="w-full h-[360px] sm:h-[440px] object-cover object-center"
               />
+              {/* Fade right — blends into text column on desktop */}
+              <div className="absolute inset-y-0 right-0 w-2/5 bg-gradient-to-r from-transparent to-[#FBF8F1]" />
+              {/* Fade bottom — grounds the image */}
+              <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-[#FBF8F1]/80 to-transparent" />
             </div>
             {/* Floating accent */}
             <div className="absolute -bottom-4 -right-4 w-32 h-32 rounded-full bg-ev-green/8 blur-2xl" />

@@ -40,8 +40,6 @@ const productImages: Record<string, string> = {
   'Castor Oil (Glass Bottle)': '/assets/shop/castor-oil-glass-bottle.png',
   'Castor Oil Pack': '/assets/shop/castor-oil-pack.webp',
   'Cayenne Pepper': '/assets/shop/cayenne-pepper.png',
-  'Celtic Sea Salt': '/assets/shop/celtic-sea-salt.png',
-  'Celtic Sea Salt (50g)': '/assets/shop/celtic-sea-salt-50g.png',
   'Chaga Mushroom': '/assets/shop/chaga-mushroom.png',
   'Chamomile': '/assets/shop/chamomile.png',
   'Chasteberry': '/assets/shop/chasteberry.png',
@@ -577,6 +575,10 @@ const ShopPage: React.FC = () => {
                         const logoFallback = '/assets/products/logo-evaya.png';
                         const imageSrc = productImages[product.name] || logoFallback;
                         const hasSpecificImage = !!productImages[product.name] && productImages[product.name] !== logoFallback;
+                        const imageStageClass =
+                          product.name === 'Chaga Mushroom'
+                            ? 'bg-white'
+                            : 'bg-gradient-to-br from-ev-cream to-ev-beige';
                         const whatsappShareLink = getProductWhatsAppLink(product, imageSrc);
 
                         return (
@@ -588,7 +590,7 @@ const ShopPage: React.FC = () => {
                             className="group bg-white rounded-xl border border-ev-border/50 p-4 hover:shadow-md hover:border-ev-green/30 transition-all duration-200 cursor-default"
                           >
                           {/* Product image */}
-                          <div className="w-full aspect-square rounded-lg bg-gradient-to-br from-ev-cream to-ev-beige flex items-center justify-center mb-3 overflow-hidden">
+                          <div className={`w-full aspect-square rounded-lg flex items-center justify-center mb-3 overflow-hidden ${imageStageClass}`}>
                             <img
                               src={imageSrc}
                               alt={product.name}
