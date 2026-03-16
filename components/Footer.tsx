@@ -58,9 +58,16 @@ const Footer: React.FC = () => {
           <div>
             <h4 className="font-heading text-base font-semibold text-white mb-5">Quick Links</h4>
             <ul className="space-y-2.5 font-body text-sm text-white/70">
-              {['About Us', 'Wellness Hub', 'Reviews', 'FAQ', 'Shipping Policy', 'Privacy Policy'].map((item) => (
-                <li key={item}>
-                  <a href="#" className="hover:text-ev-gold transition-colors">{item}</a>
+              {[
+                { label: 'About Us', href: '/#about' },
+                { label: 'Shop', href: '/shop' },
+                { label: 'Wellness Hub', href: '/wellness-hub' },
+                { label: 'Reviews', href: '/#reviews' },
+                { label: 'FAQ', href: '/#faq' },
+                { label: 'Privacy Policy', href: '#' },
+              ].map((item) => (
+                <li key={item.label}>
+                  <a href={item.href} className="hover:text-ev-gold transition-colors">{item.label}</a>
                 </li>
               ))}
             </ul>
@@ -72,15 +79,15 @@ const Footer: React.FC = () => {
             <ul className="space-y-3 font-body text-sm text-white/70">
               <li className="flex items-start gap-2.5">
                 <MapPin size={16} className="text-ev-gold mt-0.5 flex-shrink-0" />
-                <span>Kyato complex B4-03, next to Equatorial Mall, Kampala, Uganda</span>
+                <span>Kyato complex B3-17, next to Equatorial Mall, Kampala, Uganda</span>
               </li>
               <li className="flex items-center gap-2.5">
                 <Phone size={16} className="text-ev-gold flex-shrink-0" />
-                <span>+256 773 178790</span>
+                <span>+256 740 910566</span>
               </li>
               <li>
                 <a
-                  href="https://wa.me/256773178790?text=Hi%20EVAYA%20Naturals%2C%20I%27d%20like%20to%20enquire%20about%20your%20products"
+                  href="https://wa.me/256740910566?text=Hi%20EVAYA%20Naturals%2C%20I%27d%20like%20to%20enquire%20about%20your%20products"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 mt-1 px-4 py-2 bg-[#25D366] hover:bg-[#1EBE57] text-white rounded-lg text-sm font-semibold transition-all hover:-translate-y-0.5 shadow-lg shadow-[#25D366]/20"
@@ -93,7 +100,7 @@ const Footer: React.FC = () => {
               </li>
               <li className="flex items-center gap-2.5">
                 <Mail size={16} className="text-ev-gold flex-shrink-0" />
-                <span>hello@evayanaturals.com</span>
+                <span>evayanaturals@gmail.com</span>
               </li>
             </ul>
 
@@ -105,27 +112,43 @@ const Footer: React.FC = () => {
                 <span className="text-xs text-green-400 font-semibold ml-auto">Open now</span>
               </div>
               <ul className="space-y-1.5 font-body text-xs text-white/60">
-                <li className="flex justify-between"><span>Monday</span><span className="text-white/80">Open 24 hours</span></li>
-                <li className="flex justify-between"><span>Tuesday</span><span className="text-white/80">Open 24 hours</span></li>
-                <li className="flex justify-between"><span>Wednesday</span><span className="text-white/80">Open 24 hours</span></li>
-                <li className="flex justify-between"><span>Thursday</span><span className="text-white/80">Open 24 hours</span></li>
-                <li className="flex justify-between"><span>Friday</span><span className="text-white/80">Open 24 hours</span></li>
-                <li className="flex justify-between"><span>Saturday</span><span className="text-white/80">Open 24 hours</span></li>
+                <li className="flex justify-between"><span>Monday</span><span className="text-white/80">07:30 - 19:30</span></li>
+                <li className="flex justify-between"><span>Tuesday</span><span className="text-white/80">07:30 - 19:30</span></li>
+                <li className="flex justify-between"><span>Wednesday</span><span className="text-white/80">07:30 - 19:30</span></li>
+                <li className="flex justify-between"><span>Thursday</span><span className="text-white/80">07:30 - 19:30</span></li>
+                <li className="flex justify-between"><span>Friday</span><span className="text-white/80">07:30 - 19:30</span></li>
+                <li className="flex justify-between"><span>Saturday</span><span className="text-white/80">07:30 - 19:30</span></li>
                 <li className="flex justify-between"><span>Sunday</span><span className="text-red-400/80">Closed</span></li>
               </ul>
             </div>
 
             {/* Social */}
             <div className="flex items-center gap-3 mt-5">
-              {[Instagram, Facebook, Twitter].map((Icon, i) => (
-                <a
-                  key={i}
-                  href="#"
-                  className="w-9 h-9 rounded-full bg-white/10 border border-white/15 flex items-center justify-center hover:bg-ev-gold hover:border-ev-gold hover:text-ev-greenDark text-white/70 transition-all"
-                >
-                  <Icon size={16} />
-                </a>
-              ))}
+              <a
+                href="https://www.instagram.com/evayanaturals"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram"
+                className="w-9 h-9 rounded-full bg-white/10 border border-white/15 flex items-center justify-center hover:bg-ev-gold hover:border-ev-gold hover:text-ev-greenDark text-white/70 transition-all"
+              >
+                <Instagram size={16} />
+              </a>
+              <a
+                href="https://www.facebook.com/evayanaturals"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Facebook"
+                className="w-9 h-9 rounded-full bg-white/10 border border-white/15 flex items-center justify-center hover:bg-ev-gold hover:border-ev-gold hover:text-ev-greenDark text-white/70 transition-all"
+              >
+                <Facebook size={16} />
+              </a>
+              <a
+                href="#"
+                aria-label="Twitter"
+                className="w-9 h-9 rounded-full bg-white/10 border border-white/15 flex items-center justify-center hover:bg-ev-gold hover:border-ev-gold hover:text-ev-greenDark text-white/70 transition-all"
+              >
+                <Twitter size={16} />
+              </a>
             </div>
           </div>
         </div>
@@ -139,7 +162,7 @@ const Footer: React.FC = () => {
             className="block font-body text-xs text-white/60 hover:text-ev-gold transition-colors px-4 py-2.5 bg-white/5 flex items-center gap-2"
           >
             <MapPin size={14} className="text-ev-gold" />
-            View on Google Maps — Kyato Complex B4-03, next to Equatorial Mall
+            View on Google Maps — Kyato Complex B3-17, next to Equatorial Mall
           </a>
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3989.756652898385!2d32.571086874964664!3d0.3185587996783171!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMMKwMTknMDYuOCJOIDMywrAzNCcyNS4yIkU!5e0!3m2!1sen!2sug!4v1772689403732!5m2!1sen!2sug"

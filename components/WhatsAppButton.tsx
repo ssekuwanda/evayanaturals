@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
 
-const WHATSAPP_URL = 'https://wa.me/256773178790?text=Hi%20EVAYA%20Naturals%2C%20I%27d%20like%20to%20enquire%20about%20your%20products';
+const WHATSAPP_URL = 'https://wa.me/256740910566?text=Hi%20EVAYA%20Naturals%2C%20I%27d%20like%20to%20enquire%20about%20your%20products';
 
 const WhatsAppButton: React.FC = () => {
   const [showTooltip, setShowTooltip] = useState(true);

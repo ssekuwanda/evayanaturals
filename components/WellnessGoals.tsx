@@ -83,7 +83,7 @@ const WellnessGoals: React.FC = () => {
               <div className="h-[2px] w-8 bg-ev-green" />
             </div>
             <h2 className="font-heading text-3xl md:text-4xl text-ev-text">
-              Shop by <span className="text-ev-green italic font-accent">Wellness Goal</span>
+              Shop by <span className="text-ev-green italic font-accent">Wellness Goals</span>
             </h2>
           </div>
           <div className="flex items-center gap-2">

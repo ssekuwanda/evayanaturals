@@ -341,7 +341,7 @@ const categoryColors: Record<string, string> = {
 const ShopPage: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
-  const whatsappNumber = '256773178790';
+  const whatsappNumber = '256740910566';
   const shareBaseUrl = useMemo(() => {
     if (typeof window === 'undefined') return 'https://evayanaturals.com';
     const host = window.location.hostname;
@@ -653,7 +653,7 @@ const ShopPage: React.FC = () => {
             We regularly update our inventory. Contact us for custom orders and wholesale pricing.
           </p>
           <a
-            href="https://wa.me/256773178790?text=Hi%20EVAYA%20Naturals%2C%20I%27m%20looking%20for%20a%20specific%20product"
+            href="https://wa.me/256740910566?text=Hi%20EVAYA%20Naturals%2C%20I%27m%20looking%20for%20a%20specific%20product"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#1EBE57] text-white font-body font-semibold text-sm px-6 py-3 rounded-full transition-all shadow-lg shadow-[#25D366]/20"

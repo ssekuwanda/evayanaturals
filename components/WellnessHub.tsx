@@ -457,7 +457,7 @@ const WellnessHub: React.FC = () => {
                 Shop Products <ChevronRight size={16} />
               </a>
               <a
-                href="https://wa.me/256773178790?text=Hi%20EVAYA%20Naturals%2C%20I%20need%20help%20choosing%20the%20right%20supplements"
+                href="https://wa.me/256740910566?text=Hi%20EVAYA%20Naturals%2C%20I%20need%20help%20choosing%20the%20right%20supplements"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 font-body font-semibold text-sm text-ev-text px-7 py-3.5 rounded-full border-2 border-ev-border hover:border-ev-green hover:text-ev-green transition-all"

@@ -55,7 +55,7 @@ const WhyChoose: React.FC = () => {
           transition={{ duration: 0.6 }}
           className="font-accent text-3xl md:text-4xl lg:text-5xl text-white italic mb-12"
         >
-          Why Choose <span className="text-ev-goldLight">Evaya?</span>
+          Why Choose <span className="text-ev-goldLight">Evaya Naturals?</span>
         </motion.h2>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
