@@ -9,6 +9,9 @@ interface Product {
   image?: string;
 }
 
+const BASE_URL = 'https://evayanaturals.com';
+const LOGO_FALLBACK = '/assets/products/logo-evaya.png';
+
 /* ─── Per-product image URLs (from freshgrain.net) ─── */
 const productImages: Record<string, string> = {
   'Activated Charcoal': '/assets/shop/activated-charcoal.png',
@@ -43,7 +46,7 @@ const productImages: Record<string, string> = {
   'Chamomile': '/assets/shop/chamomile.png',
   'Chasteberry': '/assets/shop/chasteberry.png',
   'Chia Seeds': '/assets/shop/chia-seeds.png',
-  'Chlorella Powder': '/assets/shop/chlorella-powder.png',
+  'Chlorella Powder': '/assets/shop/chlorella-powder.jpeg',
   'Cinnamon': '/assets/shop/cinnamon.png',
   'Coconut Oil': '/assets/shop/coconut-oil.png',
   'Cranberry Powder': '/assets/shop/cranberry-powder.png',
@@ -332,6 +335,26 @@ const categoryColors: Record<string, string> = {
   'Seeds & Superfoods': 'bg-lime-50 text-lime-700 border-lime-200',
 };
 
+const slugifyProductName = (name: string) =>
+  name
+    .toLowerCase()
+    .replace(/&/g, ' and ')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+
+const storeRef = {
+  '@type': 'Store',
+  '@id': `${BASE_URL}/#store`,
+  name: 'EVAYA Naturals',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Kyato complex B3-17, next to Equatorial Mall',
+    addressLocality: 'Kampala',
+    addressRegion: 'Central Region',
+    addressCountry: 'UG',
+  },
+};
+
 const ShopPage: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
@@ -346,8 +369,13 @@ const ShopPage: React.FC = () => {
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const q = params.get('q');
+    const category = params.get('category');
     if (q) {
       setSearchQuery(q);
+    }
+    if (category && allProducts.some((product) => product.category === category)) {
+      setSelectedCategory(category);
+    } else if (q) {
       setSelectedCategory('All');
     }
   }, []);
@@ -359,17 +387,103 @@ const ShopPage: React.FC = () => {
     } else {
       params.delete('q');
     }
+    if (selectedCategory !== 'All') {
+      params.set('category', selectedCategory);
+    } else {
+      params.delete('category');
+    }
     const next = params.toString();
     const target = `/shop${next ? `?${next}` : ''}`;
     if (`${window.location.pathname}${window.location.search}` !== target) {
       window.history.replaceState({}, '', target);
     }
-  }, [searchQuery]);
+  }, [searchQuery, selectedCategory]);
 
   const categories = useMemo(() => {
     const cats = Array.from(new Set(allProducts.map(p => p.category))).sort();
     return ['All', ...cats];
   }, []);
+
+  const categorySummaries = useMemo(
+    () =>
+      categories
+        .filter((category) => category !== 'All')
+        .map((category) => ({
+          category,
+          count: allProducts.filter((product) => product.category === category).length,
+          items: allProducts
+            .filter((product) => product.category === category)
+            .map((product) => product.name)
+            .sort((a, b) => a.localeCompare(b)),
+        })),
+    [categories],
+  );
+
+  const shopStructuredData = useMemo(() => {
+    const itemListElement = allProducts.map((product, index) => {
+      const imagePath = productImages[product.name] || LOGO_FALLBACK;
+      return {
+        '@type': 'ListItem',
+        position: index + 1,
+        url: `${BASE_URL}/shop?q=${encodeURIComponent(product.name)}`,
+        item: {
+          '@type': 'Product',
+          name: product.name,
+          category: product.category,
+          image: `${BASE_URL}${imagePath}`,
+          brand: {
+            '@type': 'Brand',
+            name: 'EVAYA Naturals',
+          },
+          offers: {
+            '@type': 'Offer',
+            availability: 'https://schema.org/InStock',
+            priceCurrency: 'UGX',
+            seller: storeRef,
+            availableAtOrFrom: storeRef,
+            areaServed: { '@type': 'City', name: 'Kampala' },
+          },
+        },
+      };
+    });
+
+    return {
+      '@context': 'https://schema.org',
+      '@graph': [
+        {
+          '@type': 'ItemList',
+          '@id': `${BASE_URL}/shop#products`,
+          name: 'EVAYA Naturals natural products catalog — Kampala, Uganda',
+          numberOfItems: allProducts.length,
+          itemListOrder: 'https://schema.org/ItemListOrderAscending',
+          itemListElement,
+        },
+        {
+          '@type': 'OfferCatalog',
+          '@id': `${BASE_URL}/shop#catalog`,
+          name: 'EVAYA Naturals Shop Catalog — Kampala, Uganda',
+          itemListElement: categorySummaries.map((summary, index) => ({
+            '@type': 'OfferCatalog',
+            position: index + 1,
+            name: `${summary.category} in Uganda`,
+            numberOfItems: summary.count,
+            itemListElement: summary.items.map((itemName) => ({
+              '@type': 'Product',
+              name: itemName,
+              category: summary.category,
+              url: `${BASE_URL}/shop?q=${encodeURIComponent(itemName)}`,
+              offers: {
+                '@type': 'Offer',
+                availability: 'https://schema.org/InStock',
+                priceCurrency: 'UGX',
+                seller: storeRef,
+              },
+            })),
+          })),
+        },
+      ],
+    };
+  }, [categorySummaries]);
 
   const filtered = useMemo(() => {
     return allProducts
@@ -568,9 +682,8 @@ const ShopPage: React.FC = () => {
                     {/* Product cards grid */}
                     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3">
                       {products.map((product, idx) => {
-                        const logoFallback = '/assets/products/logo-evaya.png';
-                        const imageSrc = productImages[product.name] || logoFallback;
-                        const hasSpecificImage = !!productImages[product.name] && productImages[product.name] !== logoFallback;
+                        const imageSrc = productImages[product.name] || LOGO_FALLBACK;
+                        const hasSpecificImage = !!productImages[product.name] && productImages[product.name] !== LOGO_FALLBACK;
                         const imageStageClass =
                           product.name === 'Chaga Mushroom'
                             ? 'bg-white'
@@ -591,8 +704,8 @@ const ShopPage: React.FC = () => {
                               src={imageSrc}
                               alt={product.name}
                               onError={(e) => {
-                                if (!e.currentTarget.src.endsWith(logoFallback)) {
-                                  e.currentTarget.src = logoFallback;
+                                if (!e.currentTarget.src.endsWith(LOGO_FALLBACK)) {
+                                  e.currentTarget.src = LOGO_FALLBACK;
                                 }
                               }}
                               className={`object-contain group-hover:scale-110 transition-all duration-300 ${
@@ -644,6 +757,52 @@ const ShopPage: React.FC = () => {
       </section>
 
       {/* ═══ CTA ═══ */}
+      <section className="py-12 bg-ev-beige/35 border-t border-ev-border/40">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+          <div className="max-w-4xl">
+            <h2 className="font-heading text-2xl text-ev-text mb-3">
+              Natural Products Shop in Kampala, Uganda
+            </h2>
+            <p className="font-body text-sm sm:text-base text-ev-muted leading-7 seo-description">
+              EVAYA Naturals is Kampala's premier herbal and natural products store, stocking {allProducts.length}+ premium herbs,
+              supplements, cold-pressed oils, herbal powders, teas, seeds, skincare, and wellness essentials.
+              We serve customers across Uganda with same-day delivery in Kampala.
+              Our store is located at Kyato complex B3-17, next to Equatorial Mall, Kampala.
+              Popular products include ashwagandha, shilajit, maca, matcha, reishi mushroom, elderberry, tongkat ali,
+              ginkgo biloba, black seed oil, batana oil, sea moss powder, turmeric, moringa, and lion's mane.
+              Order via WhatsApp for fast delivery anywhere in Kampala or across Uganda.
+            </p>
+            <p className="font-body text-sm text-ev-muted mt-3 leading-7">
+              Looking for herbal supplements in Kampala? Natural oils in Uganda? Organic spices near Equatorial Mall?
+              Browse our full catalog above or contact us on WhatsApp to check availability and pricing.
+            </p>
+          </div>
+
+          <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+            {categorySummaries.map((summary) => (
+              <section
+                key={summary.category}
+                aria-labelledby={`seo-category-${slugifyProductName(summary.category)}`}
+                className="rounded-2xl border border-ev-border/60 bg-white/85 p-5 shadow-sm"
+              >
+                <h3
+                  id={`seo-category-${slugifyProductName(summary.category)}`}
+                  className="font-heading text-lg text-ev-text mb-2"
+                >
+                  {summary.category} in Uganda
+                </h3>
+                <p className="font-body text-xs uppercase tracking-[0.18em] text-ev-muted mb-3">
+                  {summary.count} products available in Kampala
+                </p>
+                <p className="font-body text-sm text-ev-muted leading-7">
+                  {summary.items.join(', ')}
+                </p>
+              </section>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="py-12 bg-white border-t border-ev-border/40">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 text-center">
           <h2 className="font-heading text-2xl text-ev-text mb-3">Can't Find What You're Looking For?</h2>
@@ -663,6 +822,11 @@ const ShopPage: React.FC = () => {
           </a>
         </div>
       </section>
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(shopStructuredData) }}
+      />
     </div>
   );
 };

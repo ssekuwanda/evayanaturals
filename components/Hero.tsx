@@ -49,13 +49,12 @@ const Hero: React.FC = () => {
             className="max-w-lg"
           >
             <h1 className="font-heading text-4xl sm:text-5xl lg:text-[3.5rem] text-ev-text leading-[1.15] mb-5">
-              Your{' '}
-              <span className="font-accent italic text-ev-green">Wellness</span>{' '}
-              Partner
+              Natural Herbs, Oils &{' '}
+              <span className="font-accent italic text-ev-green">Supplements</span>{' '}
+              in Kampala
             </h1>
             <p className="font-body text-lg sm:text-xl text-ev-muted leading-relaxed mb-8 max-w-md">
-              100% Natural Herbs, Superfoods & Oils
-              <br className="hidden sm:block" /> for a Healthier You
+              100% Natural products from EVAYA Naturals — Uganda's trusted wellness store
             </p>
 
             <div className="flex flex-wrap items-center gap-3 mb-8">

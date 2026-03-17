@@ -1,21 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://evayanaturals.com/</loc>
-    <lastmod>2026-03-05</lastmod>
-    <changefreq>weekly</changefreq>
+    <lastmod>2026-03-17</lastmod>
+    <changefreq>daily</changefreq>
     <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://evayanaturals.com/assets/products/about-hero.png</image:loc>
+      <image:title>EVAYA Naturals — Natural Products &amp; Herbal Wellness Shop in Kampala, Uganda</image:title>
+      <image:caption>EVAYA Naturals herbal wellness collection — Kampala, Uganda</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://evayanaturals.com/assets/products/spices.png</image:loc>
+      <image:title>Organic Spices &amp; Herbs — EVAYA Naturals Uganda</image:title>
+      <image:caption>Premium organic spices available at EVAYA Naturals, Kampala</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://evayanaturals.com/assets/products/logo-evaya.png</image:loc>
+      <image:title>EVAYA Naturals Logo</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://evayanaturals.com/shop</loc>
-    <lastmod>2026-03-05</lastmod>
-    <changefreq>weekly</changefreq>
+    <lastmod>2026-03-17</lastmod>
+    <changefreq>daily</changefreq>
     <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://evayanaturals.com/assets/products/spices.png</image:loc>
+      <image:title>Shop Natural Products in Kampala, Uganda — EVAYA Naturals</image:title>
+      <image:caption>160+ herbs, supplements, oils, powders, teas, and wellness products in Kampala</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://evayanaturals.com/assets/products/bee-pollen.png</image:loc>
+      <image:title>Herbal Supplements in Kampala — EVAYA Naturals</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://evayanaturals.com/assets/products/avocado-oil.png</image:loc>
+      <image:title>Natural Oils &amp; Butters in Uganda — EVAYA Naturals</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://evayanaturals.com/wellness-hub</loc>
-    <lastmod>2026-03-05</lastmod>
+    <lastmod>2026-03-17</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://evayanaturals.com/assets/products/about-hero.png</image:loc>
+      <image:title>Wellness Hub — Natural Wellness Guides by EVAYA Naturals Uganda</image:title>
+    </image:image>
   </url>
 </urlset>

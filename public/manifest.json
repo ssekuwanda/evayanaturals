@@ -1,0 +1,21 @@
+{
+  "name": "EVAYA Naturals",
+  "short_name": "EVAYA Naturals",
+  "description": "Premium organic spices, herbal supplements, cold-pressed oils, and natural wellness products in Kampala, Uganda.",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#FBF8F1",
+  "theme_color": "#2D5A27",
+  "icons": [
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon.png",
+      "sizes": "any",
+      "type": "image/png"
+    }
+  ]
+}

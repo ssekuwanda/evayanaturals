@@ -1,6 +1,16 @@
 import React from 'react';
 import { Instagram, Facebook, Twitter, Mail, Phone, MapPin, Clock } from 'lucide-react';
 
+const shopCategories = [
+  'Herbal Supplements',
+  'Spices & Herbs',
+  'Oils & Butters',
+  'Herbal Powders',
+  'Skincare',
+  'Hair Care',
+  'Herbal Teas',
+];
+
 const Footer: React.FC = () => {
   const year = new Date().getFullYear();
 
@@ -46,9 +56,14 @@ const Footer: React.FC = () => {
           <div>
             <h4 className="font-heading text-base font-semibold text-white mb-5">Shop</h4>
             <ul className="space-y-2.5 font-body text-sm text-white/70">
-              {['Herbal Supplements', 'Spices & Herbs', 'Oils & Butters', 'Herbal Powders', 'Skincare', 'Hair Care', 'Herbal Teas'].map((item) => (
+              {shopCategories.map((item) => (
                 <li key={item}>
-                  <a href="#best-sellers" className="hover:text-ev-gold transition-colors">{item}</a>
+                  <a
+                    href={`/shop?category=${encodeURIComponent(item)}`}
+                    className="hover:text-ev-gold transition-colors"
+                  >
+                    {item}
+                  </a>
                 </li>
               ))}
             </ul>
@@ -64,7 +79,7 @@ const Footer: React.FC = () => {
                 { label: 'Wellness Hub', href: '/wellness-hub' },
                 { label: 'Reviews', href: '/#reviews' },
                 { label: 'FAQ', href: '/#faq' },
-                { label: 'Privacy Policy', href: '#' },
+                { label: 'Privacy Policy', href: '/#contact' },
               ].map((item) => (
                 <li key={item.label}>
                   <a href={item.href} className="hover:text-ev-gold transition-colors">{item.label}</a>
@@ -100,7 +115,7 @@ const Footer: React.FC = () => {
               </li>
               <li className="flex items-center gap-2.5">
                 <Mail size={16} className="text-ev-gold flex-shrink-0" />
-                <span>evayanaturals@gmail.com</span>
+                <a href="mailto:evayanaturals@gmail.com" className="hover:text-ev-gold transition-colors">evayanaturals@gmail.com</a>
               </li>
             </ul>
 
@@ -143,8 +158,10 @@ const Footer: React.FC = () => {
                 <Facebook size={16} />
               </a>
               <a
-                href="#"
-                aria-label="Twitter"
+                href="https://www.tiktok.com/@evayanaturals"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="TikTok"
                 className="w-9 h-9 rounded-full bg-white/10 border border-white/15 flex items-center justify-center hover:bg-ev-gold hover:border-ev-gold hover:text-ev-greenDark text-white/70 transition-all"
               >
                 <Twitter size={16} />
@@ -183,8 +200,8 @@ const Footer: React.FC = () => {
             &copy; {year} EVAYA Naturals. All rights reserved.
           </p>
           <div className="flex items-center gap-4 font-body text-xs text-white/50">
-            <a href="#" className="hover:text-white/80 transition-colors">Terms & Conditions</a>
-            <a href="#" className="hover:text-white/80 transition-colors">Privacy Policy</a>
+            <a href="/#contact" className="hover:text-white/80 transition-colors">Terms & Conditions</a>
+            <a href="/#contact" className="hover:text-white/80 transition-colors">Privacy Policy</a>
           </div>
         </div>
       </div>
