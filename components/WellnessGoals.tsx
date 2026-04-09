@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
@@ -58,11 +58,46 @@ const StarRating: React.FC<{ rating: number }> = ({ rating }) => (
 
 const WellnessGoals: React.FC = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
+
+  const updateScrollState = () => {
+    const container = scrollRef.current;
+    if (!container) return;
+
+    const maxScrollLeft = container.scrollWidth - container.clientWidth;
+    setCanScrollLeft(container.scrollLeft > 8);
+    setCanScrollRight(container.scrollLeft < maxScrollLeft - 8);
+  };
 
   const scroll = (dir: 'left' | 'right') => {
-    if (!scrollRef.current) return;
-    scrollRef.current.scrollBy({ left: dir === 'left' ? -280 : 280, behavior: 'smooth' });
+    const container = scrollRef.current;
+    if (!container) return;
+
+    const firstCard = container.querySelector<HTMLElement>('[data-goal-card]');
+    const gap = window.innerWidth < 640 ? 16 : 20;
+    const scrollAmount = firstCard ? firstCard.offsetWidth + gap : Math.round(container.clientWidth * 0.85);
+
+    container.scrollBy({ left: dir === 'left' ? -scrollAmount : scrollAmount, behavior: 'smooth' });
   };
+
+  useEffect(() => {
+    const container = scrollRef.current;
+    if (!container) return;
+
+    updateScrollState();
+
+    const handleScroll = () => updateScrollState();
+    const handleResize = () => updateScrollState();
+
+    container.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      container.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   return (
     <section id="wellness-goals" className="py-16 md:py-20 bg-ev-cream relative overflow-hidden">
@@ -75,35 +110,39 @@ const WellnessGoals: React.FC = () => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Header */}
-        <div className="flex items-center justify-between mb-10">
-          <div>
-            <div className="flex items-center gap-3 mb-2">
+        <div className="mb-8 flex flex-col gap-5 sm:mb-10 sm:flex-row sm:items-end sm:justify-between">
+          <div className="min-w-0">
+            <div className="mb-2 flex items-center gap-2 sm:gap-3">
               <div className="h-[2px] w-8 bg-ev-green" />
               <span className="font-body text-xs uppercase tracking-[0.2em] text-ev-green font-semibold">Curated for You</span>
               <div className="h-[2px] w-8 bg-ev-green" />
             </div>
-            <h2 className="font-heading text-3xl md:text-4xl text-ev-text">
+            <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl text-ev-text leading-tight">
               Shop by <span className="text-ev-green italic font-accent">Wellness Goals</span>
             </h2>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center justify-between gap-3 sm:justify-end">
+            <div className="flex items-center gap-2">
             <button
               onClick={() => scroll('left')}
               aria-label="Scroll left"
-              className="hidden sm:flex w-10 h-10 rounded-full border-2 border-ev-border hover:border-ev-green items-center justify-center text-ev-muted hover:text-ev-green transition-all"
+              disabled={!canScrollLeft}
+              className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-ev-border text-ev-muted transition-all hover:border-ev-green hover:text-ev-green disabled:cursor-not-allowed disabled:opacity-40"
             >
               <ChevronLeft size={18} />
             </button>
             <button
               onClick={() => scroll('right')}
               aria-label="Scroll right"
-              className="hidden sm:flex w-10 h-10 rounded-full border-2 border-ev-border hover:border-ev-green items-center justify-center text-ev-muted hover:text-ev-green transition-all"
+              disabled={!canScrollRight}
+              className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-ev-border text-ev-muted transition-all hover:border-ev-green hover:text-ev-green disabled:cursor-not-allowed disabled:opacity-40"
             >
               <ChevronRight size={18} />
             </button>
+            </div>
             <a
               href="#best-sellers"
-              className="inline-flex items-center gap-1 font-body text-sm font-semibold text-ev-green hover:underline ml-2"
+              className="inline-flex items-center gap-1 whitespace-nowrap font-body text-sm font-semibold text-ev-green hover:underline"
             >
               Shop All <ChevronRight size={14} />
             </a>
@@ -112,19 +151,21 @@ const WellnessGoals: React.FC = () => {
 
         {/* Cards */}
         <div
+          id="wellness-goals-carousel"
           ref={scrollRef}
-          className="flex gap-5 overflow-x-auto no-scrollbar pb-4 scroll-smooth"
+          className="-mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-4 scroll-smooth sm:mx-0 sm:gap-5 sm:px-0"
         >
           {goals.map((goal, i) => (
             <motion.a
               key={goal.title}
               href={goal.link}
+              data-goal-card
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.08, duration: 0.5 }}
               whileHover={{ y: -6 }}
-              className="group relative flex-shrink-0 w-[200px] sm:w-[220px] bg-white rounded-2xl overflow-hidden border border-ev-border/60 shadow-sm hover:shadow-xl transition-all duration-300"
+              className="group relative w-[78vw] max-w-[220px] shrink-0 snap-start overflow-hidden rounded-2xl border border-ev-border/60 bg-white shadow-sm transition-all duration-300 hover:shadow-xl sm:w-[220px]"
             >
               {/* Image */}
               <div className="relative h-36 overflow-hidden">
